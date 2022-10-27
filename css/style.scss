@@ -1,11 +1,10 @@
 .container {
   width: 100%;
-  padding: 0 10px;
   .header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 20px 0;
+    padding: 20px 10px;
     .title {
       font-size: 1.05rem;
       font-weight: 800;
@@ -20,25 +19,85 @@
     }
   }
   .meal-list {
-    .meal-content {
+    background-color: #f3f5f9;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    .meal-content-preview {
+      max-width: 720px;
       width: 100%;
       display: flex;
       align-items: center;
       padding: 10px;
-      border: 1px solid black;
-      margin: 10px 0;
-      .meal-preview {
+      margin-bottom: 10px;
+      border-radius: 10px;
+      background-color: #fefefe;
+      transition: 0.2s ease-in-out;
+      &:hover {
+        background-color: rgb(225, 232, 245);
+        margin-left: 10px;
+      }
+      .meal-info-preview {
         width: 100%;
-        h2 {
-          font-weight: 700;
+        display: grid;
+        grid-template-columns: 0.5fr 1fr 2fr;
+        img {
+          place-self: center;
+          width: 50px;
+          border-radius: 50%;
         }
-        h3 {
-          margin-top: 5px;
+        .title {
+          display: flex;
+          justify-content: center;
+          flex-direction: column;
+          padding-left: 10px;
+          h3 {
+            color: gray;
+            font-size: 0.9rem;
+          }
+          a {
+            margin-top: 3px;
+            font-weight: 500;
+            font-size: 1.25rem;
+          }
+        }
+        .link {
+          display: grid;
+          grid-template-columns: 1fr 1fr 1fr 1fr;
+          a {
+            place-self: center;
+            font-size: 0.9rem;
+            &:first-child {
+              margin-right: 10px;
+            }
+            i {
+              margin-right: 10px;
+            }
+          }
         }
       }
-      img {
-        width: 75px;
-        border-radius: 15px;
+    }
+  }
+  .meal-content {
+    background-color: #f3f5f9;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    img {
+      max-width: 480px;
+      border-radius: 50%;
+      margin: 20px 0;
+    }
+    .meal-info {
+      max-width: 1080px;
+      margin: 10px 0;
+      padding: 30px;
+      background-color: #fefefe;
+      .name {
+        text-align: center;
+        font-size: 1.5rem;
+        font-weight: 700;
       }
     }
   }

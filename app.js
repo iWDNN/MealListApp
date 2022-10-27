@@ -1,5 +1,5 @@
 const ajax = new XMLHttpRequest();
-const MEAL_URL = "https://www.themealdb.com/api/json/v1/1/search.php?f=b";
+const SEARCH_URL = "https://www.themealdb.com/api/json/v1/1/search.php?s=b";
 const CONTENT_URL = "https://www.themealdb.com/api/json/v1/1/lookup.php?i=@id";
 const store = {
   currentPage: 1,
@@ -14,7 +14,7 @@ function getData(url) {
 }
 
 function mealFeed() {
-  const mealFeed = getData(MEAL_URL);
+  const mealFeed = getData(SEARCH_URL);
   const mealList = [];
 
   const curPage = store.currentPage;
@@ -35,12 +35,18 @@ function mealFeed() {
 
   for (let i = (curPage - 1) * 10; i < curPage * 10; i++) {
     mealList.push(`
-    <div class="meal-content">
-      <div class="meal-preview">
-        <h2>${mealFeed.meals[i].strMeal}</h2>
-        <h3>${mealFeed.meals[i].strCategory}</h3>
+    <div class="meal-content-preview">
+      <div class="meal-info-preview">
+        <img src="${mealFeed.meals[i].strMealThumb}"/>
+        <div class="title">
+          <h3>${mealFeed.meals[i].strCategory}</h3>
+          <a href="#/show/${mealFeed.meals[i].idMeal}">${mealFeed.meals[i].strMeal}</a>
+        </div>
+        <div class="link">
+          <a href="${mealFeed.meals[i].strYoutube}"><i class="fa-brands fa-youtube"></i>YouTube</a>
+          <a href="${mealFeed.meals[i].strSource}"><i class="fa-sharp fa-solid fa-bookmark"></i>Source</a>
+        </div>
       </div>
-      <img src="${mealFeed.meals[i].strMealThumb}"/>
     </div>
   `);
   }
@@ -63,12 +69,45 @@ function mealDetail() {
   const mealContent = getData(CONTENT_URL.replace("@id", id));
 
   container.innerHTML = `
-    <h4><a href="#/page/${store.currentPage}">목록으로</a></h4>
-    <h1>${mealContent.meals[0].strMeal}</h1>
-    <h3>area : ${mealContent.meals[0].strArea}</h3>
-    <h3>category${mealContent.meals[0].strCategory}</h3>
-    <img src="${mealContent.meals[0].strMealThumb}" />
-  `;
+    <div class="container">
+      <div class="header">
+        <h1 class="title">${mealContent.meals[0].strMeal}</h1>
+        <div class="page-nav">
+          <a href="#/page/${store.currentPage}">목록으로</a>
+        </div>
+      </div>
+      <div class="meal-content">
+        <img src="${mealContent.meals[0].strMealThumb}" />
+        <div class="meal-info">
+          <h1 class="name">${mealContent.meals[0].strMeal}</h1>
+          <div>
+            <div>${mealContent.meals[0].strCategory}</div>
+            <div>${mealContent.meals[0].strArea}</div>
+          </div>
+          <ul>
+            {{__meal_ingredient__}}
+          </ul>
+          <div>${mealContent.meals[0].strInstructions}</div>
+        </div>
+      </div>
+    </div>
+    `;
+  let i = 1;
+  const ingredientList = [];
+  while (mealContent.meals[0][`strMeasure${i}`] != " ") {
+    ingredientList.push(` 
+    <li>
+      <div>
+        ${mealContent.meals[0][`strIngredient${i}`]}
+      </div>
+      <div>
+        ${mealContent.meals[0][`strMeasure${i}`]}
+      </div>
+    </li>
+    `);
+    i++;
+  }
+  console.log(ingredientList.join(""));
 }
 
 function router() {

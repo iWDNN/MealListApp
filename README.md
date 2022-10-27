@@ -28,3 +28,8 @@
 - SPA(Single Page Application) : 서버로부터 완전한 새로운 페이지가 아니라 현재 페이지를 동적으로 다시 작성함으로써 소통하는 웹 어플리케이션
 - 반복 코드 함수 묶기
 - template
+
+- <div>${mealContent.meals[0].strIngredient1} ${mealContent.meals[0].strMeasure1}</div>
+       <div>${mealContent.meals[0].strIngredient2} ${mealContent.meals[0].strMeasure2}</div>
+       <div>${mealContent.meals[0].strIngredient3} ${mealContent.meals[0].strMeasure3}</div>
+
