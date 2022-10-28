@@ -23,8 +23,8 @@ function mealFeed() {
       <div class="header">
         <h1 class="title">MealDB</h1>
         <div class="page-nav">
-          <a href="#/page/{{__prev_page__}}">이전 페이지</a>
-          <a href="#/page/{{__next_page__}}">다음 페이지</a>
+          <a href="#/page/{{__prev_page__}}">prev page</a>
+          <a href="#/page/{{__next_page__}}">next page</a>
         </div>
       </div>
       <div class="meal-list">
@@ -57,9 +57,8 @@ function mealFeed() {
   );
   template = template.replace(
     "{{__next_page__}}",
-    curPage >= mealFeed.meals.length % 10 ? curPage : curPage + 1
+    curPage >= Math.floor(mealFeed.meals.length / 10) ? curPage : curPage + 1
   );
-
   container.innerHTML = template;
 }
 
@@ -72,7 +71,7 @@ function mealDetail() {
     <div class="header">
       <h1 class="title">${mealContent.meals[0].strMeal}</h1>
       <div class="page-nav">
-        <a href="#/page/${store.currentPage}">목록으로</a>
+        <a href="#/page/${store.currentPage}">Home</a>
       </div>
     </div>
     <div class="meal-content">

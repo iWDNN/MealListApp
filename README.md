@@ -18,18 +18,15 @@
 
 - 사용한 기술 :
 
-//호버맨~
-요리지역
-요리재료/양
-
 ---
 
-- JSON.parse(데이터) : JSON 데이터를 객체로 바꿔줌
-- SPA(Single Page Application) : 서버로부터 완전한 새로운 페이지가 아니라 현재 페이지를 동적으로 다시 작성함으로써 소통하는 웹 어플리케이션
+# javascript
+
+- 라우트
 - 반복 코드 함수 묶기
 - template
+- 객체 처리
 
-- <div>${mealContent.meals[0].strIngredient1} ${mealContent.meals[0].strMeasure1}</div>
-       <div>${mealContent.meals[0].strIngredient2} ${mealContent.meals[0].strMeasure2}</div>
-       <div>${mealContent.meals[0].strIngredient3} ${mealContent.meals[0].strMeasure3}</div>
+# typescript migration
 
+-

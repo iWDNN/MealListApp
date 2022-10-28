@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "strict": true, // 타입을 지정하지 않은 유형들의 에러 검사
+    "target": "ES5", // 컴파일 할 자바스크립트 언어 버전
+    "module": "CommonJS", // 후 설명
+    "alwaysStrict": true,
+    "noImplicitAny": true,
+    "noImplicitThis": true,
+    "sourceMap": true, // dist폴더에서 typescript와 javascript 사이에서 에러를 명시하거나 연결해주는 map파일
+    "downlevelIteration": true
+  }
+}
