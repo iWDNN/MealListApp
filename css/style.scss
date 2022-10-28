@@ -80,10 +80,12 @@
     }
   }
   .meal-content {
-    background-color: #f3f5f9;
+    width: 100%;
     display: flex;
     flex-direction: column;
+    justify-content: center;
     align-items: center;
+    background-color: #f3f5f9;
     img {
       max-width: 480px;
       border-radius: 50%;
@@ -91,13 +93,83 @@
     }
     .meal-info {
       max-width: 1080px;
-      margin: 10px 0;
-      padding: 30px;
       background-color: #fefefe;
+      padding: 0 30px 30px 30px;
+      border-radius: 15px;
       .name {
         text-align: center;
         font-size: 1.5rem;
         font-weight: 700;
+        padding: 20px;
+      }
+      .materials {
+        padding: 20px;
+        border-radius: 15px;
+        background-color: #fefefe;
+        h2 {
+          padding-left: 10px;
+          font-weight: 700;
+          text-transform: uppercase;
+        }
+        ul {
+          display: grid;
+          grid-template-columns: repeat(2, 1fr);
+          margin-top: 20px;
+          padding: 20px;
+          border-radius: 15px;
+          background-color: #f3f5f9;
+          li {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            padding: 2px 0;
+            div {
+              letter-spacing: 1px;
+            }
+            div:first-child {
+              font-weight: 500;
+            }
+            div:last-child {
+              place-self: center;
+            }
+          }
+        }
+      }
+      .etc {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        max-width: 1080px;
+        margin: 0 20px;
+        padding: 20px;
+        border-radius: 15px;
+        background-color: #f3f5f9;
+        * {
+          place-self: center;
+        }
+        .etc-column {
+          display: grid;
+          grid-template-columns: 1fr;
+          span {
+            place-self: center;
+          }
+          span:first-child {
+            color: rgb(122, 122, 122);
+            font-size: 0.8rem;
+          }
+          span:last-child {
+            font-weight: 600;
+            margin-top: 10px;
+            a {
+              i {
+                margin-right: 5px;
+              }
+            }
+          }
+        }
+      }
+      .intruction {
+        padding: 20px;
+        letter-spacing: 0.5px;
+        line-height: 1.2;
       }
     }
   }

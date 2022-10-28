@@ -65,33 +65,50 @@ function mealFeed() {
 
 function mealDetail() {
   const id = location.hash.substring(7);
-
   const mealContent = getData(CONTENT_URL.replace("@id", id));
 
-  container.innerHTML = `
-    <div class="container">
-      <div class="header">
-        <h1 class="title">${mealContent.meals[0].strMeal}</h1>
-        <div class="page-nav">
-          <a href="#/page/${store.currentPage}">목록으로</a>
-        </div>
+  let template = `
+  <div class="container">
+    <div class="header">
+      <h1 class="title">${mealContent.meals[0].strMeal}</h1>
+      <div class="page-nav">
+        <a href="#/page/${store.currentPage}">목록으로</a>
       </div>
-      <div class="meal-content">
-        <img src="${mealContent.meals[0].strMealThumb}" />
-        <div class="meal-info">
-          <h1 class="name">${mealContent.meals[0].strMeal}</h1>
-          <div>
-            <div>${mealContent.meals[0].strCategory}</div>
-            <div>${mealContent.meals[0].strArea}</div>
-          </div>
+    </div>
+    <div class="meal-content">
+      <img src="${mealContent.meals[0].strMealThumb}" />
+      <div class="meal-info">
+        <h1 class="name">${mealContent.meals[0].strMeal}</h1>
+        <div class="materials">
+          <h2>materials</h2>  
           <ul>
             {{__meal_ingredient__}}
           </ul>
-          <div>${mealContent.meals[0].strInstructions}</div>
         </div>
+        <div class="etc">
+          <div class="etc-column">
+            <span>Category</span>
+            <span>${mealContent.meals[0].strCategory}</span>
+          </div>
+          <div class="etc-column">
+            <span>Area</span>
+            <span>${mealContent.meals[0].strArea}</span>
+          </div>
+          <div class="etc-column">
+            <span>Link</span>
+            <span><a href="${mealContent.meals[0].strYoutube}"><i class="fa-brands fa-youtube"></i>YouTube</a></span>
+          </div>
+          <div class="etc-column">
+            <span>Source</span>
+            <span><a href="${mealContent.meals[0].strSource}"><i class="fa-sharp fa-solid fa-bookmark"></i>Source</a></span>
+          </div>
+        </div>
+        <div class="intruction">${mealContent.meals[0].strInstructions}</div>
       </div>
     </div>
-    `;
+  </div>
+  `;
+
   let i = 1;
   const ingredientList = [];
   while (mealContent.meals[0][`strMeasure${i}`] != " ") {
@@ -107,7 +124,11 @@ function mealDetail() {
     `);
     i++;
   }
-  console.log(ingredientList.join(""));
+  template = template.replace(
+    "{{__meal_ingredient__}}",
+    ingredientList.join("")
+  );
+  container.innerHTML = template;
 }
 
 function router() {
