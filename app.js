@@ -14,7 +14,7 @@ function getData(url) {
 }
 
 function mealFeed() {
-  const mealFeed = getData(SEARCH_URL);
+  let mealFeed = getData(SEARCH_URL);
   const mealList = [];
 
   const curPage = store.currentPage;
