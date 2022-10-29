@@ -65,6 +65,30 @@ const store: Store = {
   currentPage: 1,
 };
 
+class Api {
+  url: string;
+  ajax: XMLHttpRequest;
+  constructor(url: string) {
+    this.url = url;
+    this.ajax = new XMLHttpRequest();
+  }
+  getRequest<AjaxResponse>(): AjaxResponse {
+    this.ajax.open("GET", this.url, false);
+    this.ajax.send();
+    return JSON.parse(this.ajax.response);
+  }
+}
+class MealFeedApi extends Api {
+  getData(): MealList {
+    return this.getRequest<MealList>();
+  }
+}
+class MealDetailApi extends Api {
+  getData(): MealList {
+    return this.getRequest<MealList>();
+  }
+}
+
 function getData<AjaxResponse>(url: string): AjaxResponse {
   ajax.open("GET", url, false);
   ajax.send();
@@ -82,7 +106,6 @@ function updateView(html: string): void {
 function mealFeed(): void {
   let mealFeed: MealList = getData<MealList>(SEARCH_URL);
   const mealList = [];
-  console.log("hi");
 
   const curPage = store.currentPage;
 
