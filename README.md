@@ -35,3 +35,8 @@
 - type alias , interface
 
 - api 클래스화
+- view 클래스화
+- router 클래스화
+- class
+  - private : 자기자신에서만 호출 가능 (자식에서도 접근 불가능)
+  - protected : 자식도 접근 가능
