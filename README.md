@@ -37,6 +37,17 @@
 - api 클래스화
 - view 클래스화
 - router 클래스화
-- class
+- 클래스
+
   - private : 자기자신에서만 호출 가능 (자식에서도 접근 불가능)
   - protected : 자식도 접근 가능
+
+- 파일 분리
+
+  - core : 공통코드
+  - page
+  - types : interface
+  - config.ts : 설정파일
+
+- store
+  - window 전역객체로 접근 가능하게 만드는 방법이 있지만, 모든곳에서 접근 가능한 전역공간이라 안전성이 좋지않음.
