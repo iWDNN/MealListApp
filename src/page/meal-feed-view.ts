@@ -1,7 +1,6 @@
 import { SEARCH_URL } from "../config";
 import { MealFeedApi } from "../core/api";
 import View from "../core/view";
-import Store from "../store";
 import { MealDetail, MealList, MealStore } from "../types";
 
 const template = `
@@ -20,29 +19,37 @@ const template = `
 `;
 export default class MealFeedView extends View {
   private api: MealFeedApi;
-  private feeds: MealList;
   private store: MealStore;
 
   constructor(containerId: string, store: MealStore) {
     super(containerId, template);
 
     this.api = new MealFeedApi(SEARCH_URL);
-    this.feeds = this.api.getData();
     this.store = store;
   }
   render(): void {
     this.store.currentPage = +location.hash.substring(7) || 1;
+
+    if (!this.store.hasData) {
+      this.api.getDataWithPromise((data: MealList) => {
+        this.store.setData(data);
+        this.renderView();
+      });
+    }
+    this.renderView();
+  }
+  renderView = () => {
     const curPage = this.store.currentPage;
 
     for (let i = (curPage - 1) * 10; i < curPage * 10; i++) {
       const {
-        strMealThumb,
-        strCategory,
         idMeal,
         strMeal,
         strYoutube,
         strSource,
-      }: MealDetail = this.feeds.meals[i];
+        strMealThumb,
+        strCategory,
+      }: MealDetail = this.store.getData(i);
       this.addHtml(`
       <div class="meal-content-preview">
         <div class="meal-info-preview">
@@ -61,8 +68,8 @@ export default class MealFeedView extends View {
     }
     this.setTemplateData("meal_feed", this.getHtml());
     this.setTemplateData("prev_page", String(this.store.prevPage));
-    this.setTemplateData("next_page", String(this.store.nextPage));
+    this.setTemplateData("next_page", String(this.store.getNextPage()));
 
     this.updateView();
-  }
+  };
 }

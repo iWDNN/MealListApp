@@ -53,33 +53,33 @@ export default class MealDetailView extends View {
   render(): void {
     const id = location.hash.substring(7);
     const api = new MealDetailApi(CONTENT_URL.replace("@id", id));
-    const mealFeed: MealList = api.getData();
+    api.getDataWithPromise((data: MealList) => {
+      const {
+        strMeal,
+        strCategory,
+        strArea,
+        strYoutube,
+        strSource,
+        strInstructions,
+        strMealThumb,
+      }: MealDetail = data.meals[0];
 
-    const {
-      strMeal,
-      strCategory,
-      strArea,
-      strYoutube,
-      strSource,
-      strInstructions,
-      strMealThumb,
-    }: MealDetail = mealFeed.meals[0];
+      this.setTemplateData(
+        "meal_ingredient",
+        this.makeingredients(data.meals[0])
+      );
+      this.setTemplateData("currentPage", String(this.store.currentPage));
+      this.setTemplateData("strMeal", strMeal);
+      this.setTemplateData("strMealThumb", strMealThumb);
+      this.setTemplateData("strMeal", strMeal);
+      this.setTemplateData("strCategory", strCategory);
+      this.setTemplateData("strArea", strArea);
+      this.setTemplateData("strYoutube", strYoutube);
+      this.setTemplateData("strSource", strSource);
+      this.setTemplateData("strInstructions", strInstructions);
 
-    this.setTemplateData(
-      "meal_ingredient",
-      this.makeingredients(mealFeed.meals[0])
-    );
-    this.setTemplateData("currentPage", String(this.store.currentPage));
-    this.setTemplateData("strMeal", strMeal);
-    this.setTemplateData("strMealThumb", strMealThumb);
-    this.setTemplateData("strMeal", strMeal);
-    this.setTemplateData("strCategory", strCategory);
-    this.setTemplateData("strArea", strArea);
-    this.setTemplateData("strYoutube", strYoutube);
-    this.setTemplateData("strSource", strSource);
-    this.setTemplateData("strInstructions", strInstructions);
-
-    this.updateView();
+      this.updateView();
+    });
   }
 
   private makeingredients(meal: MealDetail): string {

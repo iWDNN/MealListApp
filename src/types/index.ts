@@ -2,8 +2,11 @@ import View from "../core/view";
 
 export interface MealStore {
   currentPage: number;
-  nextPage: number;
   prevPage: number;
+  hasData: boolean;
+  getData: (position: number) => MealDetail;
+  setData: (data: MealList) => void;
+  getNextPage: () => number;
 }
 
 export interface MealList {
@@ -65,19 +68,3 @@ export interface RouteInfo {
   path: string;
   page: View;
 }
-/** 
-get getCurrentPage() {
-    return this._currentPage;
-  }
-  set setCurrentPage(curPage: number) {
-    this._currentPage = curPage;
-  }
-  get getNextPage(): number {
-    return this._currentPage >= Math.floor(this.feeds.meals.length / 10)
-      ? this._currentPage
-      : this._currentPage + 1;
-  }
-  get getPrevPage(): number {
-    return this._currentPage > 1 ? this._currentPage - 1 : 1;
-  }
-**/
