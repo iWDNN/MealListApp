@@ -27,20 +27,14 @@ export default class MealFeedView extends View {
     this.api = new MealFeedApi(SEARCH_URL);
     this.store = store;
   }
-  render(): void {
+  async render(): Promise<void> {
     this.store.currentPage = +location.hash.substring(7) || 1;
 
     if (!this.store.hasData) {
-      this.api.getDataWithPromise((data: MealList) => {
-        this.store.setData(data);
-        this.renderView();
-      });
+      this.store.setData(await this.api.getData());
     }
-    this.renderView();
-  }
-  renderView = () => {
-    const curPage = this.store.currentPage;
 
+    const curPage = this.store.currentPage;
     for (let i = (curPage - 1) * 10; i < curPage * 10; i++) {
       const {
         idMeal,
@@ -51,25 +45,25 @@ export default class MealFeedView extends View {
         strCategory,
       }: MealDetail = this.store.getData(i);
       this.addHtml(`
-      <div class="meal-content-preview">
-        <div class="meal-info-preview">
-          <img src="${strMealThumb}"/>
-          <div class="title">
-            <h3>${strCategory}</h3>
-            <a href="#/show/${idMeal}">${strMeal}</a>
-          </div>
-          <div class="link">
-            <a href="${strYoutube}"><i class="fa-brands fa-youtube"></i>YouTube</a>
-            <a href="${strSource}"><i class="fa-sharp fa-solid fa-bookmark"></i>Source</a>
+        <div class="meal-content-preview">
+          <div class="meal-info-preview">
+            <img src="${strMealThumb}"/>
+            <div class="title">
+              <h3>${strCategory}</h3>
+              <a href="#/show/${idMeal}">${strMeal}</a>
+            </div>
+            <div class="link">
+              <a href="${strYoutube}"><i class="fa-brands fa-youtube"></i>YouTube</a>
+              <a href="${strSource}"><i class="fa-sharp fa-solid fa-bookmark"></i>Source</a>
+            </div>
           </div>
         </div>
-      </div>
-    `);
+      `);
     }
     this.setTemplateData("meal_feed", this.getHtml());
     this.setTemplateData("prev_page", String(this.store.prevPage));
     this.setTemplateData("next_page", String(this.store.getNextPage()));
 
     this.updateView();
-  };
+  }
 }

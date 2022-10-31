@@ -50,36 +50,35 @@ export default class MealDetailView extends View {
     super(containerId, template);
     this.store = store;
   }
-  render(): void {
+  async render(): Promise<void> {
     const id = location.hash.substring(7);
     const api = new MealDetailApi(CONTENT_URL.replace("@id", id));
-    api.getDataWithPromise((data: MealList) => {
-      const {
-        strMeal,
-        strCategory,
-        strArea,
-        strYoutube,
-        strSource,
-        strInstructions,
-        strMealThumb,
-      }: MealDetail = data.meals[0];
+    const data = await api.getData();
+    const {
+      strMeal,
+      strCategory,
+      strArea,
+      strYoutube,
+      strSource,
+      strInstructions,
+      strMealThumb,
+    }: MealDetail = data.meals[0];
 
-      this.setTemplateData(
-        "meal_ingredient",
-        this.makeingredients(data.meals[0])
-      );
-      this.setTemplateData("currentPage", String(this.store.currentPage));
-      this.setTemplateData("strMeal", strMeal);
-      this.setTemplateData("strMealThumb", strMealThumb);
-      this.setTemplateData("strMeal", strMeal);
-      this.setTemplateData("strCategory", strCategory);
-      this.setTemplateData("strArea", strArea);
-      this.setTemplateData("strYoutube", strYoutube);
-      this.setTemplateData("strSource", strSource);
-      this.setTemplateData("strInstructions", strInstructions);
+    this.setTemplateData(
+      "meal_ingredient",
+      this.makeingredients(data.meals[0])
+    );
+    this.setTemplateData("currentPage", String(this.store.currentPage));
+    this.setTemplateData("strMeal", strMeal);
+    this.setTemplateData("strMealThumb", strMealThumb);
+    this.setTemplateData("strMeal", strMeal);
+    this.setTemplateData("strCategory", strCategory);
+    this.setTemplateData("strArea", strArea);
+    this.setTemplateData("strYoutube", strYoutube);
+    this.setTemplateData("strSource", strSource);
+    this.setTemplateData("strInstructions", strInstructions);
 
-      this.updateView();
-    });
+    this.updateView();
   }
 
   private makeingredients(meal: MealDetail): string {
