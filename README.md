@@ -1,4 +1,4 @@
-- 프로젝트 명 : Meal db
+- 프로젝트 명 : 기초 웹 앱의 기본 구조 익히기
 
 - 제작 기간 : 22/10/20 ~ 10/31
 
@@ -8,19 +8,9 @@
 
 - 주요 기능 : 음식 검색 / api 데이터 처리
 
----
-
-- 프로젝트 명 : 자바스크립트를 통한 웹 앱의 기본 구조 익히기 / 타입스크립트로 리팩토링 해보기
-
-- 제작 기간 : 22/10/20 ~ 10/31
-
-- 사용 언어 : Javascript / Typescript
-
-- 타이틀 : mealDB
-
 - 사용한 기술 : parcel-bundler, sass
 
----
+- 링크 : https://peppy-jelly-b3ec5f.netlify.app/
 
 # javascript coding
 
