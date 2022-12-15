@@ -1,6 +1,6 @@
 - 프로젝트 명 : Meal db
 
-- 제작 기간 : 22/10/20
+- 제작 기간 : 22/10/20 ~ 10/31
 
 - 사용 기술 : Javascript / Typescript
 
@@ -12,28 +12,29 @@
 
 - 프로젝트 명 : 자바스크립트를 통한 웹 앱의 기본 구조 익히기 / 타입스크립트로 리팩토링 해보기
 
+- 제작 기간 : 22/10/20 ~ 10/31
+
 - 사용 언어 : Javascript / Typescript
 
 - 타이틀 : mealDB
 
-- 사용한 기술 :
+- 사용한 기술 : parcel-bundler, sass
 
 ---
 
-# javascript
+# javascript coding
 
-- 라우트
-- 반복 코드 함수 묶기
-- template
-- 객체 처리
+- 라우트 함수 만들기
+- 반복 코드 함수 묶어서 관리하기
+- template을 통해 html 찍어내기
+- 객체 데이터 관리 / 처리
 
-# typescript migration
+# typescript migration coding
 
 - 변수에 타입 지정
 - 함수의 타입 가드
-- 제네릭 : 받을 데이터의 유형이 계속 늘어날 경우, 입력유형도 n개 출력유형도 n개의 유형으로 만들어줄수있다.
-- type alias , interface
-
+  - type alias , interface
+  - 제네릭 : 받을 데이터의 유형이 계속 늘어날 경우, 입력유형도 n개 출력유형도 n개의 유형으로 만들어줄수있다.
 - api 클래스화
 - view 클래스화
 - router 클래스화
